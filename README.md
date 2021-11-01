@@ -1,7 +1,7 @@
 # StockDetails
 This project contains the python script used scraps through the NIFTY 50 - top gainers and top losers and print formatted data on the terminal with Gain/Loss as compared to previous execution of the script.
 
-**stock_details.py** script's can use 2 different approaches for scrapping through the provided urls. First approach use **BeautifulSoup** and second approach uses **lxml**. With lxml package url scrapping is more time efficient as compared to BeautifulSoup package.previous 
+**stock_details.py** script's can use 2 different approaches for scrapping through the provided urls. First approach use **BeautifulSoup** and second approach uses **lxml**. With lxml package url scrapping is more time efficient as compared to BeautifulSoup package. 
 
 On execution of stock_details.py 2 storage files are generated i.e, **gainers.json** and **losers.json**, these json files are used to calculate Gain/Lost percentage as compared to previous script execution. 
 
