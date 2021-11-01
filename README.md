@@ -8,7 +8,7 @@ On execution of stock_details.py 2 storage files are generated i.e, **gainers.js
 **Indication for output generated**
 ```
 Green text: percentage gain or no change
-Red text: Percentage loss
+Red text:   Percentage loss
 ```
 
 The project also contains the **requirements.txt** contains the packages required for this project.
