@@ -56,8 +56,7 @@ class StockScrape:
                     prev_data = prev_stocks[key]
                     formatted_output += "{:<30} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18}".format(
                         '{}....'.format(key[:25]) if len(key) > 28 else key, *value)
-                    gain_loss = (
-                        (value[2] - prev_data[2]) / prev_data[2]) * 100
+                    gain_loss = ((value[2] - prev_data[2]) / prev_data[2]) * 100
                     value.append(gain_loss)
                     if gain_loss >= 0:
                         formatted_output += "\033[92m{:<18}\033[0m\n".format(
