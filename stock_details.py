@@ -16,7 +16,11 @@ class StockScrape:
         """method is used to scrap the URL and provide output in a format
         which could be dumped as json in a file
         i.e, {'stock_name': [stock details]} using BeautifulSoup."""
-        data = requests.get(self.url)
+        try:
+            data = requests.get(self.url)
+        except Exception as exc:
+            print("\033[91m{}\033[0m".format(str(exc)))
+            exit()
         parsed_data = Soup(data.text, "html.parser")
         req_div = parsed_data.find_all(
             "div", {"class": "bsr_table hist_tbl_hm"})
@@ -31,7 +35,11 @@ class StockScrape:
         """method is used to scrap the URL and provide output in a format
         which could be dumped as json in a file
         i.e, {'stock_name': [stock details]} using lxml."""
-        stock_page = requests.get(self.url)
+        try:
+            stock_page = requests.get(self.url)
+        except Exception as exc:
+            print("\033[91m{}\033[0m".format(str(exc)))
+            exit()
         parser = html.fromstring(stock_page.text)
         rows = parser.xpath(
             '//div[@class="bsr_table hist_tbl_hm"]/table/tbody/tr')
