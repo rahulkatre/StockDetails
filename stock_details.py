@@ -33,7 +33,7 @@ class StockScrape:
 
     def formatted_data(self):
         try:
-            formatted_output = "\033[93m{:<35} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20}\033[0m\n".format(
+            formatted_output = "\033[93m{:<30} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18}\033[0m\n".format(
                 *self.header)
             fp = open(self.storage, 'r')
             prev_stocks = json.loads(fp.read())
@@ -41,20 +41,23 @@ class StockScrape:
             for key, value in self.stocks.items():
                 try:
                     prev_data = prev_stocks[key]
-                    formatted_output += "{:<35} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20}".format(key, *value)
+                    formatted_output += "{:<30} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18}".format(
+                        '{}....'.format(key[:25]) if len(key) > 28 else key, *value)
                     gain_loss = ((value[2] - prev_data[2]) / prev_data[2]) * 100
                     value.append(gain_loss)
                     if gain_loss >= 0:
-                        formatted_output += "\033[92m{:<20}\033[0m\n".format(round(gain_loss, 4))
+                        formatted_output += "\033[92m{:<18}\033[0m\n".format(round(gain_loss, 4))
                     else:
-                        formatted_output += "\033[91m{:<20}\033[0m\n".format(round((-1) * gain_loss, 4))
+                        formatted_output += "\033[91m{:<18}\033[0m\n".format(round((-1) * gain_loss, 4))
                 except KeyError:
                     value.append('New Entrant')
-                    formatted_output += "{:<35} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20}\n".format(key, *value)
+                    formatted_output += "{:<30} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18}\n".format(
+                        '{}....'.format(key[:25]) if len(key) > 28 else key, *value)
         except FileNotFoundError:
             for key, value in self.stocks.items():
                 value.append('New Entrant')
-                formatted_output += "{:<35} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20} {:<20}\n".format(key, *value)
+                formatted_output += "{:<30} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18} {:<18}\n".format(
+                    '{}....'.format(key[:25]) if len(key) > 28 else key, *value)
         with open(self.storage, 'w') as fp:
             fp.write(json.dumps(self.stocks))
 
